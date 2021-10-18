@@ -1,0 +1,9 @@
+.button {
+  color: black;
+  &_create {
+    color: cyan;
+  }
+  &_delete {
+    color: crimson;
+  }
+}
