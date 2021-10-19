@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
 type TUseFetchProps = {
-  pageNumber?: number;
-  query?: { key: string; value: string };
+  title?: string;
+  start?: string;
+  url?: string;
 };
 
 export type TResponseItem = {
@@ -12,25 +13,24 @@ export type TResponseItem = {
   title: string;
 };
 
-const useFetch = ({ pageNumber, query }: TUseFetchProps) => {
+const useFetch = ({ title, start = "0", url }: TUseFetchProps) => {
   const [respData, setRespData] = useState<Array<TResponseItem>>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (pageNumber) {
-        return await fetch(
-          `http://localhost:8000/products?_page=${pageNumber}`
-        ).then((res) => res.json().then((res) => setRespData(res)));
+      if (url) {
+        return await fetch(url).then((res) =>
+          res.json().then((res) => setRespData(res))
+        );
       }
-      if (query) {
-        const queryValue = query.value.replace(/" "/g, "%");
-        return await fetch(
-          `http://localhost:8000/products?${query.key}=${queryValue}`
-        ).then((res) => res.json().then((res) => setRespData(res)));
-      }
+      return await fetch(
+        `http://localhost:8000/products?${
+          title ? `title=${title}` : ""
+        }&_start=${start}&_limit=10`
+      ).then((res) => res.json().then((res) => setRespData(res)));
     };
     fetchData();
-  }, [pageNumber, query?.key, query?.value]);
+  }, [title, start, url]);
   return respData;
 };
 

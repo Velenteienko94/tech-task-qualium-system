@@ -1,6 +1,8 @@
 import { TButtonPropTypes } from ".";
+
 import "./styles.scss";
-const Button = ({ type, onClick, cardId }: TButtonPropTypes) => {
+
+export const Button = ({ type, onClick, cardId }: TButtonPropTypes) => {
   const chooseButtonText = () => {
     if (type === "edit") {
       return "Edit";
@@ -17,7 +19,7 @@ const Button = ({ type, onClick, cardId }: TButtonPropTypes) => {
     if (type === "create") {
       return "Create";
     }
-    return "Click me";
+    return "";
   };
   const btnText = chooseButtonText();
   return (
@@ -26,5 +28,3 @@ const Button = ({ type, onClick, cardId }: TButtonPropTypes) => {
     </button>
   );
 };
-
-export default Button;

@@ -1,3 +1,3 @@
-import CreateView from "./CreateView";
+import { CreateView } from "./CreateView";
 
 export default CreateView;

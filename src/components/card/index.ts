@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./Card";
+import { Card } from "./Card";
 
 // export type TCardInfo = {
 //   id: number;
@@ -13,7 +13,7 @@ export type TCardPropsTypes = {
   title: string;
   price: string;
   description: string;
-  // onEdit: () => void;
+  onEdit: (event: React.MouseEvent) => void;
   // onDelete: () => void;
   onAddToCArt: (event: React.MouseEvent) => void;
 };

@@ -1,3 +1,3 @@
-import EditView from "./EditView";
+import { EditView } from "./EditView";
 
 export default EditView;
