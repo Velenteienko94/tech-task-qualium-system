@@ -10,6 +10,7 @@ export const Card = ({
   id,
   onAddToCArt,
   onEdit,
+  onDelete,
 }: TCardPropsTypes) => {
   return (
     <div id={id.toString()} className="card-container">
@@ -18,6 +19,7 @@ export const Card = ({
       <p>{description}</p>
       <Button onClick={onEdit} type="edit" />
       <Button cardId={id.toString()} onClick={onAddToCArt} type="AddToCard" />
+      <Button onClick={onDelete} type="delete" />
     </div>
   );
 };

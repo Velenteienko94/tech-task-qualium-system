@@ -7,6 +7,7 @@ import Navbar from "../../components/navbar";
 import Pagination from "../../components/pagination";
 import { useFetch } from "../../hooks";
 import { CartContext } from "../../providers/cart-provider";
+import { EditContext } from "../../providers/edit-provider";
 import { FilterContext } from "../../providers/filter-provider";
 
 import "./styles.scss";
@@ -15,6 +16,8 @@ export const MainView = () => {
   const { filterValue, paginationValue } = useContext(FilterContext);
 
   const { addItemToCart } = useContext(CartContext);
+
+  const { setEditValue } = useContext(EditContext);
 
   const history = useHistory();
 
@@ -36,18 +39,31 @@ export const MainView = () => {
     ev.preventDefault();
     const target = ev.target as Element;
     const itemId = target.parentElement?.id;
-    const eddittingElement = fetch(
-      `http://localhost:8000/products?id=${itemId}`
-    )
-      .then((resp) => resp.json())
-      .then((resp) => console.log(resp));
-
-    console.log(eddittingElement);
-
+    const eddittingElement = async () => {
+      await fetch(`http://localhost:8000/products?id=${itemId}`)
+        .then((resp) => resp.json())
+        .then((resp) => setEditValue(resp[0]));
+    };
+    eddittingElement();
     history.push("/edit");
   };
 
-  console.log(data);
+  const onDelete = (ev: React.MouseEvent) => {
+    ev.preventDefault();
+    const target = ev.target as Element;
+    const itemId = target.parentElement?.id;
+    const deleteItem = async () => {
+      await fetch(`http://localhost:8000/products/${itemId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    };
+    deleteItem();
+    //to delete element from page
+    // data.sort((item) => item.id !== itemId));
+  };
 
   return (
     <div>
@@ -64,7 +80,7 @@ export const MainView = () => {
           price={productItem.price}
           onEdit={onEdit}
           onAddToCArt={onAddToCArt}
-          // onDelete={() => {}}
+          onDelete={onDelete}
         />
       ))}
       <Pagination />

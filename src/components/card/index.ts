@@ -14,7 +14,7 @@ export type TCardPropsTypes = {
   price: string;
   description: string;
   onEdit: (event: React.MouseEvent) => void;
-  // onDelete: () => void;
+  onDelete: (event: React.MouseEvent) => void;
   onAddToCArt: (event: React.MouseEvent) => void;
 };
 
