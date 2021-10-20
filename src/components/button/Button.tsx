@@ -7,6 +7,7 @@ export const Button = ({
   onClick,
   cardId,
   disabled,
+  children,
 }: IButtonPropTypes) => {
   const chooseButtonText = () => {
     if (text === "edit") {
@@ -34,7 +35,7 @@ export const Button = ({
       className={`btton button_${text}`}
       onClick={onClick}
     >
-      {btnText}
+      {btnText || children}
     </button>
   );
 };

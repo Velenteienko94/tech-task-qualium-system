@@ -1,4 +1,4 @@
-import React, { FormEventHandler, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 
 import "./styles.scss";

@@ -5,6 +5,7 @@ type TUseFetchProps = {
   start?: string;
   url?: string;
   limit?: string;
+  method?: string;
 };
 
 export type TResponseItem = {
@@ -20,24 +21,34 @@ const useFetch = ({
   start = "0",
   url,
   limit = "10",
+  method = "GET",
 }: TUseFetchProps) => {
   const [respData, setRespData] = useState<Array<TResponseItem>>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       if (url) {
-        return await fetch(url).then((res) =>
-          res.json().then((res) => setRespData(res))
-        );
+        return await fetch(url, {
+          method,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then((res) => res.json().then((res) => setRespData(res)));
       }
       return await fetch(
         `http://localhost:8000/products?${
           title ? `title=${title}` : ""
-        }&_start=${start}${limit ? `&_limit=${limit}` : ""}`
+        }&_start=${start}${limit ? `&_limit=${limit}` : ""}`,
+        {
+          method,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       ).then((res) => res.json().then((res) => setRespData(res)));
     };
     fetchData();
-  }, [title, start, url, limit]);
+  }, [title, start, url, limit, method]);
   return respData;
 };
 

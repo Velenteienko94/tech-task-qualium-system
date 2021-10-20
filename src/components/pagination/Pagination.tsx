@@ -10,8 +10,16 @@ export const Pagination = () => {
 
   const { filterValue } = useContext(FilterContext);
 
-  const filterResp = useFetch({ start: "0", limit: "0", title: filterValue });
-  const fullResp = useFetch({ url: "http://localhost:8000/products" });
+  const filterResp = useFetch({
+    start: "0",
+    limit: "0",
+    title: filterValue,
+    method: "GET",
+  });
+  const fullResp = useFetch({
+    url: "http://localhost:8000/products",
+    method: "GET",
+  });
 
   const quantityPages = filterValue
     ? filterResp.length > 10

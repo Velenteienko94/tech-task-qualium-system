@@ -25,8 +25,8 @@ export const MainView = () => {
   const history = useHistory();
 
   const searchQuery = filterValue
-    ? { title: filterValue, start: "0" }
-    : { title: filterValue, start: paginationValue };
+    ? { title: filterValue, start: "0", method: "GET" }
+    : { title: filterValue, start: paginationValue, method: "GET" };
 
   const data = useFetch(searchQuery);
 
@@ -61,7 +61,7 @@ export const MainView = () => {
     // add to cart on db
 
     const addToCartArray = async () => {
-      await fetch(`http://localhost:8000/cart/`, {
+      await fetch(`http://localhost:8000/cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -117,11 +117,16 @@ export const MainView = () => {
     // deleteItem();
   };
 
+  const onGoToCart = () => {
+    history.push("/cart");
+  };
+
   return (
     <div>
       <Navbar>
         <Filter />
         <Button text="create" onClick={onCreate} />
+        <Button onClick={onGoToCart}> Go to Cart </Button>
       </Navbar>
       {viewData.map((productItem, idx) => (
         <Card
