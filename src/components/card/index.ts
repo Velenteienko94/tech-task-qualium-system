@@ -9,13 +9,14 @@ import { Card } from "./Card";
 // };
 
 export type TCardPropsTypes = {
-  id: number;
+  id: string;
   title: string;
   price: string;
   description: string;
-  onEdit: (event: React.MouseEvent) => void;
-  onDelete: (event: React.MouseEvent) => void;
-  onAddToCArt: (event: React.MouseEvent) => void;
+  children?: React.ReactNode;
+  // onEdit: (event: React.MouseEvent) => void;
+  // onDelete: (event: React.MouseEvent) => void;
+  // onAddToCArt: (event: React.MouseEvent) => void;
 };
 
 export default Card;

@@ -30,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "api": "json-server --watch ./server/db.json --port 8000",
-    "startWithApi": "concurrently \"json-server --watch ./server/db.json --port 8000\" \"react-scripts start\""
+    "startWithApi": "concurrently \"json-server --watch ./server/newDb.json --port 8000\" \"react-scripts start\""
   },
   "eslintConfig": {
     "extends": [

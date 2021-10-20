@@ -1,7 +1,6 @@
 import { Redirect, Route, Switch } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import CartProvider from "./providers/cart-provider";
 import FilterProvider from "./providers/filter-provider";
 import EditProvider from "./providers/edit-provider";
 
@@ -11,11 +10,12 @@ import EditView from "./views/editView";
 import MainView from "./views/mainView";
 
 import "./App.scss";
+import PaginationProvider from "./providers/pagination-provider";
 
 function App() {
   return (
     <Router>
-      <CartProvider>
+      <PaginationProvider>
         <FilterProvider>
           <EditProvider>
             <Switch>
@@ -37,7 +37,7 @@ function App() {
             </Switch>
           </EditProvider>
         </FilterProvider>
-      </CartProvider>
+      </PaginationProvider>
     </Router>
   );
 }

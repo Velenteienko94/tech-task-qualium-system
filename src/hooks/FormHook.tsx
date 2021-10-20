@@ -1,21 +1,32 @@
 import { useState } from "react";
 
-type TUseFormInitVal = {
-  description: string;
-  id: number;
-  price: string;
+export type TUseFormFieldValues = {
+  id: string;
   title: string;
+  price: string;
+  description: string;
+  inCart?: boolean;
 };
 
-type TUseFormProps = {
-  intialValue?: TUseFormInitVal;
+export type TUseFormValidationRules = {
+  title: boolean;
+  price: boolean;
+  description: boolean;
 };
 
-const useForm = (initialValue: TUseFormInitVal): TUseFormProps => {
-  const [formData, setFormData] = useState({});
-  if (initialValue) {
-    setFormData(initialValue);
-  }
+export type TUseFormErrors = {
+  error: string;
+};
+
+type TUseFormInitialValue = {
+  fieldsValues: TUseFormFieldValues;
+  validationRules: TUseFormValidationRules;
+  errors: TUseFormErrors;
+};
+
+const useForm = (initialValue: TUseFormInitialValue) => {
+  const [formData, setFormData] = useState(initialValue);
+
   return formData;
 };
 

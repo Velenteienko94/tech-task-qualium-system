@@ -1,12 +1,11 @@
 import { createContext } from "react";
-
 import { FilterProvider } from "./FilterProvider";
 
+export type TFilterValue = string;
+
 export type TFilterContext = {
-  filterValue: string;
-  paginationValue: string;
-  setFilterValue: (value: string) => void;
-  setPaginationValue: (value: string) => void;
+  filterValue: TFilterValue;
+  setFilterValue: (value: TFilterValue) => void;
 };
 
 export const FilterContext = createContext<TFilterContext>(

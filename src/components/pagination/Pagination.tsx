@@ -1,16 +1,25 @@
 import { useContext } from "react";
 import useFetch from "../../hooks/FetchHook";
 import { FilterContext } from "../../providers/filter-provider";
+import { PaginationContext } from "../../providers/pagination-provider";
 
 import "./styles.scss";
 
 export const Pagination = () => {
-  const { paginationValue, setPaginationValue } = useContext(FilterContext);
+  const { paginationValue, setPaginationValue } = useContext(PaginationContext);
 
+  const { filterValue } = useContext(FilterContext);
+
+  const filterResp = useFetch({ start: "0", limit: "0", title: filterValue });
   const fullResp = useFetch({ url: "http://localhost:8000/products" });
 
-  const quantityPages =
-    fullResp.length > 10 ? Math.ceil(fullResp.length / 10) : 0;
+  const quantityPages = filterValue
+    ? filterResp.length > 10
+      ? Math.ceil(fullResp.length / 10)
+      : 0
+    : fullResp.length > 10
+    ? Math.ceil(fullResp.length / 10)
+    : 0;
 
   const paginationPages = Array.from(Array(quantityPages).keys());
 
@@ -38,13 +47,23 @@ export const Pagination = () => {
     );
   };
 
+  if (paginationPages.length === 0) {
+    paginationPages.push(0);
+  }
+
   return (
     <div>
       <button className="pagination_prev-btn" onClick={onPrevClick}>
         prev
       </button>
-      {paginationPages.map((el) => (
-        <button className="pagination_page-btn" onClick={onPaginationPageClick}>
+      {paginationPages.map((el, idx) => (
+        <button
+          key={Math.ceil(Math.random() * idx * el * 1000 + 1)
+            .toString()
+            .concat(`FQWD${idx}`)}
+          className="pagination_page-btn"
+          onClick={onPaginationPageClick}
+        >
           {el + 1}
         </button>
       ))}

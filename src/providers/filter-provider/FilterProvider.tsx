@@ -1,18 +1,11 @@
 import { useState } from "react";
-import { FilterContext } from ".";
+import { FilterContext, TFilterValue } from ".";
 
 export const FilterProvider: React.FC = ({ children }) => {
-  const [filterValue, setFilterValue] = useState("");
-  const [paginationValue, setPaginationValue] = useState("");
+  const [filterValue, setFilterValue] = useState<TFilterValue>("");
+
   return (
-    <FilterContext.Provider
-      value={{
-        filterValue,
-        paginationValue,
-        setFilterValue,
-        setPaginationValue,
-      }}
-    >
+    <FilterContext.Provider value={{ filterValue, setFilterValue }}>
       {children}
     </FilterContext.Provider>
   );

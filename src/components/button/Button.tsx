@@ -1,29 +1,39 @@
-import { TButtonPropTypes } from ".";
+import { IButtonPropTypes } from ".";
 
 import "./styles.scss";
 
-export const Button = ({ type, onClick, cardId }: TButtonPropTypes) => {
+export const Button = ({
+  text,
+  onClick,
+  cardId,
+  disabled,
+}: IButtonPropTypes) => {
   const chooseButtonText = () => {
-    if (type === "edit") {
+    if (text === "edit") {
       return "Edit";
     }
-    if (type === "delete") {
+    if (text === "delete") {
       return "Delete";
     }
-    if (type === "AddToCard") {
+    if (text === "AddToCard") {
       return "Add to cart";
     }
-    if (type === "save") {
+    if (text === "save") {
       return "Save";
     }
-    if (type === "create") {
+    if (text === "create") {
       return "Create";
     }
     return "";
   };
   const btnText = chooseButtonText();
   return (
-    <button id={cardId} className={`btton button_${type}`} onClick={onClick}>
+    <button
+      disabled={disabled}
+      id={cardId}
+      className={`btton button_${text}`}
+      onClick={onClick}
+    >
       {btnText}
     </button>
   );
